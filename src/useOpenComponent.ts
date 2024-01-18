@@ -14,21 +14,17 @@ export enum Components {
 
 export const components = {
     [Components.USER]: User
+	// Exhaustive
 }
 
 export type ComponentTypes = typeof components;
-type RawState<T extends keyof ComponentTypes> = InferElementProps<
+export type RawState<T extends keyof ComponentTypes> = InferElementProps<
 	ComponentTypes[T]
->;
-
-export type ComponentState<T extends keyof ComponentTypes> = Omit<
-	RawState<T>,
-	"close"
 >;
 
 export type OpenComponent = <T extends keyof ComponentTypes>(
 	modalType: T,
-	newState: ComponentState<T>
+	newState: RawState<T>
 ) => void;
 
 export const componentContext = createContext<{ openComponent: OpenComponent } | null>(null);

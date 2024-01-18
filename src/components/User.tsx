@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useContext } from "react";
+import { closeContext } from "../contexts";
+
 type User = {
     name: string;
     email: string | null;
@@ -15,26 +19,24 @@ type UserUpdate = {
     email?: string | null;
 }
 
-type UserPropsBase = {
-    close: () => void;
-    groupID: string;
-}
 
 type CreateUserProps = {
     type: "create",
     submit: (payload: UserCreate) => Promise<unknown>;
+    groupID: string;
 }
 
 type UpdateUserProps = {
     type: "update",
     submit: (payload: UserUpdate) => Promise<unknown>;
     existingUser: User;
+    groupID: string;
 }
 
-export type UserProps = UserPropsBase & (CreateUserProps | UpdateUserProps);
+export type UserProps = CreateUserProps | UpdateUserProps;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const User = (props: UserProps) => {
+    const close = useContext(closeContext);
     // apply defaults to props if create
 
     // prefill using existingUser if update

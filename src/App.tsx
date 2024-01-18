@@ -16,7 +16,6 @@ function App() {
     const props: UserProps = {
       type: "update",
       existingUser: {name: "foo", email: null, digest: ""},
-      close: () => {},
       groupID: "123",
       submit: (_payload) => Promise.resolve()
     }
@@ -24,7 +23,6 @@ function App() {
     openComponent(Components.USER, {
       type: "update",
       existingUser: {name: "foo", email: null, digest: ""},
-      close: () => {},
       groupID: "123",
       submit: payload => Promise.resolve()
     })
